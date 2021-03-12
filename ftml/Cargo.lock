@@ -492,6 +492,7 @@ dependencies = [
  "tinyvec",
  "unicase",
  "void",
+ "wasm-bindgen",
  "wikidot-normalize",
 ]
 
