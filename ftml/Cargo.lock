@@ -289,6 +289,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "console_log"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "501a375961cef1a0d44767200e66e4a559283097e91d0730b1d75dfb2f8a1494"
+dependencies = [
+ "log",
+ "web-sys",
+]
+
+[[package]]
 name = "core-foundation"
 version = "0.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -475,6 +485,7 @@ name = "ftml"
 version = "0.5.0"
 dependencies = [
  "cfg-if 1.0.0",
+ "console_log",
  "enum-map",
  "lazy_static",
  "maplit",
@@ -483,8 +494,10 @@ dependencies = [
  "ref-map",
  "regex",
  "serde",
+ "serde-wasm-bindgen",
  "serde_json",
  "slog",
+ "slog-stdlog",
  "sloggers",
  "str-macro",
  "strum",
@@ -1701,6 +1714,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bd761ff957cb2a45fbb9ab3da6512de9de55872866160b23c25f1a841e99d29f"
 dependencies = [
  "serde_derive",
+]
+
+[[package]]
+name = "serde-wasm-bindgen"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7ee6f12f7ed0e7ad2e55200da37dbabc2cadeb942355c5b629aa3771f5ac5636"
+dependencies = [
+ "fnv",
+ "js-sys",
+ "serde",
+ "wasm-bindgen",
 ]
 
 [[package]]

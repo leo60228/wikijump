@@ -105,3 +105,6 @@ pub mod prelude {
     pub use super::tree::{Element, SyntaxTree};
     pub use super::{data, preprocess};
 }
+
+#[cfg(target_arch = "wasm32")]
+pub mod wasm;
