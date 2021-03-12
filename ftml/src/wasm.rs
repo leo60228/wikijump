@@ -11,10 +11,9 @@ lazy_static! {
 }
 
 #[wasm_bindgen]
-pub fn preprocess(source: &str) -> String {
-    let mut string = source.into();
-    super::preprocess(&*LOGGER, &mut string);
-    string
+pub fn preprocess(mut source: String) -> String {
+    super::preprocess(&*LOGGER, &mut source);
+    source
 }
 
 #[wasm_bindgen]
