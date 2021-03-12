@@ -1,4 +1,5 @@
 use lazy_static::lazy_static;
+use ouroboros::self_referencing;
 use slog::{o, Drain, Logger};
 use wasm_bindgen::prelude::*;
 
@@ -17,9 +18,30 @@ pub fn preprocess(source: &str) -> String {
 }
 
 #[wasm_bindgen]
-pub fn tokenize(source: &str) -> Result<JsValue, JsValue> {
-    let tokenization = super::tokenize(&*LOGGER, source);
-    let tokens = tokenization.tokens();
-    let serialized = serde_wasm_bindgen::to_value(&tokens)?;
-    Ok(serialized)
+#[self_referencing]
+pub struct Tokenization {
+    buf: String,
+    #[borrows(buf)]
+    #[covariant]
+    inner: crate::Tokenization<'this>,
+}
+
+#[wasm_bindgen]
+impl Tokenization {
+    pub fn tokens(&self) -> Result<JsValue, JsValue> {
+        self.with_inner(|inner| {
+            let tokens = inner.tokens();
+            let js = serde_wasm_bindgen::to_value(&tokens)?;
+            Ok(js)
+        })
+    }
+}
+
+#[wasm_bindgen]
+pub fn tokenize(source: String) -> Tokenization {
+    TokenizationBuilder {
+        buf: source,
+        inner_builder: |buf: &str| super::tokenize(&*LOGGER, buf),
+    }
+    .build()
 }
