@@ -48,15 +48,16 @@ mod prelude {
 use self::boolean::parse_boolean;
 use self::depth::{process_depths, DepthItem, DepthList};
 use self::paragraph::{gather_paragraphs, NO_CLOSE_CONDITION};
-use self::parser::Parser;
 use self::rule::impls::RULE_PAGE;
 use self::string::parse_string;
 use crate::tokenizer::Tokenization;
 use crate::tree::SyntaxTree;
 use std::borrow::Cow;
 
+pub use self::consume::consume;
 pub use self::exception::{ParseException, ParseWarning, ParseWarningKind};
 pub use self::outcome::ParseOutcome;
+pub use self::parser::Parser;
 pub use self::result::{ParseResult, ParseSuccess};
 pub use self::token::{ExtractedToken, Token};
 
